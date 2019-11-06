@@ -37,17 +37,14 @@ module.exports = {
   devtool: 'source-map',
   devServer: {
     host: '0.0.0.0',
-    port: 3000,
+    port: 3005,
     contentBase: publicPath,
     historyApiFallback: true,
     watchContentBase: true,
     stats: 'minimal',
     proxy: {
       '/api': {
-        target: 'http://localhost',
-        headers: {
-          Host: 'prov.localhost'
-        }
+        target: 'http://localhost'
       }
     }
   }
