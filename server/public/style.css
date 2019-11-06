@@ -7,6 +7,7 @@ body {
   margin: 0;
   display: flex;
   font-family: Nunito;
+  flex-direction: column;
 }
 
 .container {
@@ -14,21 +15,29 @@ body {
   padding: 1rem;
 }
 
+.button {
+  border: 1px black solid;
+}
+
+.button:hover {
+  color: white;
+  background: grey;
+}
+
+/*Header*/
 .header {
   width: 100%;
   height: 30px;
   border-bottom: 1px solid black;
-  justify-content: space-between
+  justify-content: space-between;
+  padding-right: 30px;
 }
 
 .logo {
-  display: flex;
   align-items: center;
-  font-family: Roboto;
 }
 
 .navigation {
-  display: flex;
   align-items: center;
 }
 
@@ -45,6 +54,44 @@ body {
 .nav-icon {
   display: none;
 }
+
+.main.container {
+  box-sizing: border-box;
+}
+
+/*Posts*/
+
+.post.container {
+  width: 75%;
+}
+
+.post-table {
+  width: 100%;
+}
+
+th {
+  justify-content: center;
+}
+
+/*Post Form*/
+.post-form.container {
+  width: 25%;
+  border: 1px black solid;
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-form.button {
+  display: flex;
+  width: 4rem;
+  text-align: center;
+}
+
+
 
 @media(max-width: 530px) {
   .navigation-list {

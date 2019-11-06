@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const express = require('express');
+const moment = require('moment');
 const credentials = require('./mysql_credentials');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -17,13 +18,14 @@ db.connect(function (err) {
 
 const server = express();
 
-server.use(express.static(path.resolve(__dirname, '/dist')));
+server.use(express.static(path.resolve(__dirname, '../public')));
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
 
-server.get('/api/grades', (req, res) => {
+server.get('/api/jobs', (req, res) => {
   db.connect(function () {
-    let query = 'SELECT * FROM grades';
+    let query =
+    'SELECT j.id, company, phone_interview, onsite_interview, interview_questions, DATE_FORMAT(response_date, "%m-%d-%y") response_date, DATE_FORMAT(date_applied, "%m-%d-%y") date_applied, offer, salary, u.name username FROM `job_reports` j JOIN user_list u ON u.id = j.user_id';
     db.query(query, function (err, data) {
       if (!err) {
         let output = {
@@ -33,6 +35,37 @@ server.get('/api/grades', (req, res) => {
         res.send(output);
       }
     });
+  });
+});
+
+server.post('/api/jobs', (req, res) => {
+  let name = req.body.name;
+  let date = req.body.date;
+
+  let query =
+    `INSERT INTO job_reports ( company, date_applied )
+    VALUES ( ? , ? )`;
+
+  db.query(query, [name, date], (err, data) => {
+    if (!err) {
+      let output = {
+        'success': true,
+        'data': {
+          'id': data.insertId,
+          'company': name,
+          'phone_interview': null,
+          'onsite_interview': null,
+          'interview_questions': null,
+          'response_date': null,
+          'date_applied': moment(date, 'YYYY-MM-DD').format('M-D-YY'),
+          'offer': null,
+          'username': 'Edward Lee'
+        }
+      };
+      res.send(output);
+    } else {
+      res.send(err);
+    }
   });
 });
 
@@ -51,36 +84,6 @@ server.delete('/api/grades/:id', (req, res) => {
       let output = {
         success: true,
         data: data
-      };
-      res.send(output);
-    }
-  });
-});
-
-server.post('/api/grades', (req, res) => {
-  let name = JSON.stringify(req.body.name);
-  let course = JSON.stringify(req.body.course);
-  let grade = JSON.parse(req.body.grade);
-
-  if (grade > 150 || grade < 0) {
-    res.send('Invalid Grade' + grade);
-    return;
-  }
-
-  let query =
-    `INSERT INTO grades ( name, course, grade)
-    VALUES (` + name + `, ` + course + `, ` + grade + `)`;
-
-  db.query(query, (err, data) => {
-    if (!err) {
-      let output = {
-        'success': true,
-        'data': {
-          'id': data.insertId,
-          'name': JSON.parse(name),
-          'course': JSON.parse(course),
-          'grade': grade
-        }
       };
       res.send(output);
     }
