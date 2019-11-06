@@ -3,7 +3,7 @@ const credentials = {
   'host': 'localhost',
   'user': 'root',
   'password': 'root',
-  'database': 'c819_SGT',
+  'database': 'job_search',
   'port': 3306
 };
 
