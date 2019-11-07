@@ -24,7 +24,7 @@ export default class PostEditForm extends React.Component {
     if (node.contains(event.target)) {
       return;
     }
-    this.props.onCancel();
+    this.props.callbacks.onCancel();
   }
 
   onChange(event) {
@@ -34,17 +34,17 @@ export default class PostEditForm extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     let target = event.target.id;
-    this.props.edit(this.props.id, target, this.state.value);
-    this.props.onCancel();
+    this.props.callbacks.edit(this.props.data.id, target, this.state.value);
+    this.props.callbacks.onCancel();
   }
 
   render() {
     return (
       <td align="left">
         <div className="edit-input-container">
-          <input id={this.props.field} className="edit-input" type={this.props.type} value={this.state.company} onChange={this.onChange} />
-          <div id={this.props.field} className="edit button" onClick={this.onSubmit}>Submit</div>
-          <div id={this.props.field} className="edit button" onClick={this.props.onCancel}>Cancel</div>
+          <input id={this.props.data.field} className="edit-input" type={this.props.data.type} value={this.state.value} onChange={this.onChange} />
+          <div id={this.props.data.field} className="edit button" onClick={this.onSubmit}>Submit</div>
+          <div id={this.props.data.field} className="edit button" onClick={this.props.callbacks.onCancel}>Cancel</div>
         </div>
       </td>
     );
