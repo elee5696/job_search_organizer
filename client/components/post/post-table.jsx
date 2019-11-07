@@ -10,6 +10,7 @@ export default class PostTable extends React.Component {
             <th align="left">Company</th>
             <th align="left">Date Applied</th>
             <th align="left">Response</th>
+            <th align="left">Functions</th>
           </tr>
           {
             this.props.jobs.map(job => {
@@ -20,7 +21,8 @@ export default class PostTable extends React.Component {
                   company={job.company}
                   dateApplied={job.date_applied}
                   responseDate={job.response_date}
-                  delete={this.props.delete} />
+                  delete={this.props.delete}
+                  edit={this.props.edit} />
               );
             })
           }
