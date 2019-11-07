@@ -121,18 +121,18 @@ tr:nth-child(even) {
 }
 
 /*Edit Post*/
-.cancel.button {
+.edit.button {
   width: 4rem;
   text-align: center;
   margin-right: 1rem;
 }
 
-.cancel-input {
+.edit-input {
   width: 60%;
   margin-right: 1rem;
 }
 
-.cancel-input-container {
+.edit-input-container {
   display: flex;
 }
 
