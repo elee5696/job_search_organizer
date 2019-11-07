@@ -16,9 +16,11 @@ export default class PostTable extends React.Component {
               return (
                 <Post
                   key={job.id}
+                  id={job.id}
                   company={job.company}
                   dateApplied={job.date_applied}
-                  responseDate={job.response_date} />
+                  responseDate={job.response_date}
+                  delete={this.props.delete} />
               );
             })
           }
