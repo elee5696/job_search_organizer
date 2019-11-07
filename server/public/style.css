@@ -175,7 +175,7 @@ tr:nth-of-type(even) {
 
 /*Media Queries*/
 /* Iphone X */
-@media(max-width: 530px) {
+@media(max-width: 610px) {
   /*Modal*/
   .modal-container {
     width: 100%;

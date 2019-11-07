@@ -2,7 +2,8 @@ import React from 'react';
 import Header from './header';
 import PostTable from './post/post-table';
 import PostEntryForm from './post/post-entry-form';
-import AddButton from './addbutton';
+import AddButton from './add-button';
+import AddModal from './add-modal';
 import moment from 'moment';
 
 export default class App extends React.Component {
@@ -95,9 +96,7 @@ export default class App extends React.Component {
         <Header/>
         {
           this.state.addModal
-            ? <div className="modal-container">
-              <PostEntryForm modal={true} add={this.add} />
-            </div>
+            ? <AddModal add={this.add} toggleAddModal={this.toggleAddModal}/>
             : null
         }
         <div className="main container">
@@ -107,9 +106,13 @@ export default class App extends React.Component {
             edit={this.edit} />
           <PostEntryForm
             add={this.add} />
-          <AddButton
-            add={this.add}
-            toggle={this.toggleAddModal}/>
+          {
+            this.state.addModal
+              ? null
+              : <AddButton
+                add={this.add}
+                toggle={this.toggleAddModal} />
+          }
         </div>
       </>
     );
