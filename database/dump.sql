@@ -16,30 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `company_list`
---
-
-DROP TABLE IF EXISTS `company_list`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `company_list` (
-  `id` mediumint(8) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `company_list`
---
-
-LOCK TABLES `company_list` WRITE;
-/*!40000 ALTER TABLE `company_list` DISABLE KEYS */;
-INSERT INTO `company_list` VALUES (1,'Google'),(2,'Netflix');
-/*!40000 ALTER TABLE `company_list` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `job_reports`
 --
 
@@ -48,8 +24,8 @@ DROP TABLE IF EXISTS `job_reports`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `job_reports` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
-  `company_id` mediumint(8) NOT NULL,
-  `user_id` mediumint(8) NOT NULL,
+  `company` varchar(60) NOT NULL,
+  `user_id` mediumint(8) NOT NULL DEFAULT '1',
   `phone_interview` tinyint(1) DEFAULT NULL,
   `onsite_interview` tinyint(1) DEFAULT NULL,
   `interview_questions` longtext,
@@ -58,7 +34,7 @@ CREATE TABLE `job_reports` (
   `offer` tinyint(1) DEFAULT NULL,
   `salary` mediumint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +43,7 @@ CREATE TABLE `job_reports` (
 
 LOCK TABLES `job_reports` WRITE;
 /*!40000 ALTER TABLE `job_reports` DISABLE KEYS */;
-INSERT INTO `job_reports` VALUES (1,1,1,1,1,'What is AJAX?,What is the Event Loop?,Create a Link List','2019-11-10','2019-11-06',NULL,NULL),(2,2,1,NULL,NULL,NULL,NULL,'2019-11-06',NULL,NULL);
+INSERT INTO `job_reports` VALUES (17,'Netflix',1,0,0,NULL,NULL,'2019-11-06',NULL,NULL),(18,'Google',1,0,0,NULL,NULL,'2019-11-08',NULL,NULL),(19,'Uber',1,0,0,NULL,NULL,'2019-11-07',NULL,NULL);
 /*!40000 ALTER TABLE `job_reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-06 17:23:20
+-- Dump completed on 2019-11-07 18:14:06
