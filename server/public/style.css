@@ -101,7 +101,7 @@ td {
   user-select: none;
 }
 
-tr:nth-child(even) {
+tr:nth-of-type(even) {
   background: rgb(235, 235, 235);
 }
 
@@ -158,6 +158,19 @@ tr:nth-child(even) {
 .post-form.container.large input,
 .post-form.container.large label {
   margin-bottom: 1rem;
+}
+
+.post-expanded.container {
+  flex-direction: column;
+}
+
+.post-expanded-entry {
+  display: flex;
+  flex-direction: row;
+}
+
+.post-expanded.container td {
+  width: 100%;
 }
 
 /*Media Queries*/
