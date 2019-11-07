@@ -8,7 +8,7 @@ export default class PostTable extends React.Component {
         <table className="post-table">
           <tr>
             <th align="left">Company</th>
-            <th align="left">Date Applied</th>
+            <th align="left">Applied</th>
             <th align="left">Response</th>
             <th align="left">Functions</th>
           </tr>
