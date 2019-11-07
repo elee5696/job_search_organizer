@@ -33,6 +33,8 @@ server.get('/api/jobs', (req, res) => {
           data: data
         };
         res.send(output);
+      } else {
+        res.send(err);
       }
     });
   });
@@ -77,38 +79,43 @@ server.delete('/api/jobs/:id', (req, res) => {
     return;
   }
 
-  let query = `DELETE FROM job_reports WHERE id = ${jobId}`;
+  let query = 'DELETE FROM job_reports WHERE id = ?';
 
-  db.query(query, (err, data) => {
+  db.query(query, [jobId], (err, data) => {
     if (!err) {
       let output = {
         success: true,
         data: data
       };
       res.send(output);
+    } else {
+      res.send(err);
     }
   });
 
 });
 
-server.patch('/api/grades/:id', (req, res) => {
-  let gradeID = req.params.id;
-  let grade = req.body.grade;
+server.patch('/api/jobs/:id', (req, res) => {
+  let jobId = req.params.id;
+  let field = req.body.field;
+  let value = req.body.value;
 
-  if (grade > 150 || grade < 0) {
-    res.send('Invalid Grade' + grade);
+  if (!jobId) {
+    res.send('Invalid Job ID: ' + jobId);
     return;
   }
 
-  let query = `UPDATE grades SET grade=${grade} WHERE id=${gradeID}}`;
+  let query = `UPDATE job_reports SET ${field}=? WHERE id=${jobId}`;
 
-  db.query(query, (err, data) => {
+  db.query(query, [value], (err, data) => {
     if (!err) {
       let output = {
         success: true,
         data: data
       };
       res.send(output);
+    } else {
+      res.send(err);
     }
   });
 });
