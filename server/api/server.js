@@ -69,15 +69,15 @@ server.post('/api/jobs', (req, res) => {
   });
 });
 
-server.delete('/api/grades/:id', (req, res) => {
-  let gradeID = req.params.id;
+server.delete('/api/jobs/:id', (req, res) => {
+  let jobId = req.params.id;
 
-  if (!gradeID) {
-    res.send('Invalid Student ID' + gradeID);
+  if (!jobId) {
+    res.send('Invalid Job ID: ' + jobId);
     return;
   }
 
-  let query = `DELETE FROM grades WHERE id = ${gradeID}`;
+  let query = `DELETE FROM job_reports WHERE id = ${jobId}`;
 
   db.query(query, (err, data) => {
     if (!err) {
@@ -88,6 +88,7 @@ server.delete('/api/grades/:id', (req, res) => {
       res.send(output);
     }
   });
+
 });
 
 server.patch('/api/grades/:id', (req, res) => {

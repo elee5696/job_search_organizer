@@ -9,7 +9,8 @@ export default class App extends React.Component {
     this.state = {
       jobs: []
     };
-    this.addListing = this.addListing.bind(this);
+    this.add = this.add.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   componentDidMount() {
@@ -23,7 +24,7 @@ export default class App extends React.Component {
       .catch(err => console.error(err));
   }
 
-  addListing(name, date) {
+  add(name, date) {
     let jobs = [...this.state.jobs];
 
     fetch('/api/jobs', {
@@ -43,13 +44,28 @@ export default class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  delete(id) {
+    let jobs = [...this.state.jobs];
+
+    fetch('/api/jobs/' + id, { method: 'DELETE' })
+      .then(res => res.json())
+      .then(json => {
+        jobs = jobs.filter(e => e.id !== id);
+        this.setState({ jobs: jobs });
+      })
+      .catch(err => console.error(err));
+  }
+
   render() {
     return (
       <>
         <Header/>
         <div className="main container">
-          <PostTable jobs={this.state.jobs} />
-          <PostEntryForm add={this.addListing}/>
+          <PostTable
+            jobs={this.state.jobs}
+            delete={this.delete} />
+          <PostEntryForm
+            add={this.add}/>
         </div>
       </>
     );
