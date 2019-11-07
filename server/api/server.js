@@ -59,7 +59,7 @@ server.post('/api/jobs', (req, res) => {
           'onsite_interview': null,
           'interview_questions': null,
           'response_date': null,
-          'date_applied': moment(date, 'YYYY-MM-DD').format('M-D-YY'),
+          'date_applied': moment(date, 'YYYY-MM-DD').format('MM-DD-YY'),
           'offer': null,
           'username': 'Edward Lee'
         }

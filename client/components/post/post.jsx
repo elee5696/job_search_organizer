@@ -47,8 +47,8 @@ export default class Post extends React.Component {
             ? <td align="left">
               <div className="cancel-input-container">
                 <input id="company" className="cancel-input" type="text" value={this.state.company} onChange={this.onChange} />
-                <div id="company" className="cancel button" onClick={this.onCancel}>Cancel</div>
                 <div id="company" className="cancel button" onClick={this.onSubmit}>Submit</div>
+                <div id="company" className="cancel button" onClick={this.onCancel}>Cancel</div>
               </div>
             </td>
             : <td className="post-entry" id="company" align="left" onDoubleClick={this.toggleEdit}>{this.props.company}</td>
@@ -58,8 +58,8 @@ export default class Post extends React.Component {
             ? <td align="left">
               <div className="cancel-input-container">
                 <input id="date_applied" className="cancel-input" type="date" value={this.state.date_applied} onChange={this.onChange} />
-                <div id="date_applied" className="cancel button" onClick={this.onCancel}>Cancel</div>
                 <div id="date_applied" className="cancel button" onClick={this.onSubmit}>Submit</div>
+                <div id="date_applied" className="cancel button" onClick={this.onCancel}>Cancel</div>
               </div>
             </td>
             : <td className="post-entry" id="date_applied" align="left" onDoubleClick={this.toggleEdit}>{this.props.dateApplied}</td>
@@ -69,8 +69,8 @@ export default class Post extends React.Component {
             ? <td align="left">
               <div className="cancel-input-container">
                 <input id="response_date" className="cancel-input" type="date" value={this.state.response_date} onChange={this.onChange} />
-                <div id="response_date" className="cancel button" onClick={this.onCancel}>Cancel</div>
                 <div id="response_date" className="cancel button" onClick={this.onSubmit}>Submit</div>
+                <div id="response_date" className="cancel button" onClick={this.onCancel}>Cancel</div>
               </div>
             </td>
             : <td className="post-entry" id="response_date" align="left" onDoubleClick={this.toggleEdit}>{this.props.responseDate}</td>
@@ -78,7 +78,7 @@ export default class Post extends React.Component {
         <td align="left">
           <div className="functions container">
             <div className="delete button" onClick={this.delete}>Delete</div>
-            <div className="expand button" onClick={this.delete}>Expand</div>
+            <div className="expand button" onClick={this.expand}>Expand</div>
           </div>
         </td>
       </tr>
