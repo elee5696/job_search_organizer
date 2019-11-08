@@ -21,6 +21,7 @@ input {
 
 .button {
   border: 1px black solid;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -83,7 +84,6 @@ input {
 
 
 /*Posts*/
-
 .post.container {
   width: 75%;
 }
@@ -102,11 +102,12 @@ td {
 }
 
 tr:nth-of-type(even) {
-  background: rgb(235, 235, 235);
+  background: rgb(241, 241, 241);
 }
 
 .post-entry:hover {
   background: rgba(184, 184, 184, 0.37);
+  cursor: pointer;
 }
 
 .functions.container {
@@ -161,12 +162,29 @@ tr:nth-of-type(even) {
 }
 
 .post-expanded.container {
+  flex-direction: row;
+}
+
+.post-expanded.container .left.container,
+.post-expanded.container .right.container {
   flex-direction: column;
+}
+
+.post-expanded.container .left.container {
+  width: 25%;
+}
+
+.post-expanded.container .right.container {
+  width: 75%;
 }
 
 .post-expanded-entry {
   display: flex;
   flex-direction: row;
+}
+
+.post-expanded-entry:hover {
+  cursor: pointer;
 }
 
 .post-expanded.container td {
