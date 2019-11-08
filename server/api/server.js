@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const mysql = require('mysql');
 const db = mysql.createConnection(credentials);
-const port = 3008;
+const port = 3000;
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
@@ -132,7 +132,7 @@ server.patch('/api/jobs/:id', (req, res) => {
   });
 });
 
-server.put('/api/user', (req, res) => {
+server.put('/api/jobs/user', (req, res) => {
   let email = req.body.email;
   let username = req.body.username;
   let pass = req.body.pass;
@@ -156,7 +156,7 @@ server.put('/api/user', (req, res) => {
   });
 });
 
-server.post('/api/user', (req, res) => {
+server.post('/api/jobs/user', (req, res) => {
   let username = req.body.username;
   let pass = req.body.pass;
 
