@@ -109,7 +109,7 @@ export default class App extends React.Component {
   }
 
   getUser(data) {
-    fetch('/api/jobs/user', {
+    fetch('/api/user', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -128,7 +128,7 @@ export default class App extends React.Component {
   }
 
   addUser(data) {
-    fetch('/api/jobs/user', {
+    fetch('/api/user', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)

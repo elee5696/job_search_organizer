@@ -132,7 +132,7 @@ server.patch('/api/jobs/:id', (req, res) => {
   });
 });
 
-server.put('/api/jobs/user', (req, res) => {
+server.put('/api/user', (req, res) => {
   let email = req.body.email;
   let username = req.body.username;
   let pass = req.body.pass;
@@ -156,7 +156,7 @@ server.put('/api/jobs/user', (req, res) => {
   });
 });
 
-server.post('/api/jobs/user', (req, res) => {
+server.post('/api/user', (req, res) => {
   let username = req.body.username;
   let pass = req.body.pass;
 
