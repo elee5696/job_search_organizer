@@ -4,7 +4,7 @@ export default class PostEditForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: '' || this.props.data.value
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -39,6 +39,17 @@ export default class PostEditForm extends React.Component {
   }
 
   render() {
+    if (this.props.data.field === 'interview_questions') {
+      return (
+        <td align="left">
+          <div className="edit-input-container">
+            <textarea id={this.props.data.field} className="edit-input" type={this.props.data.type} value={this.state.value} onChange={this.onChange} />
+            <div id={this.props.data.field} className="edit button" onClick={this.onSubmit}>Submit</div>
+            <div id={this.props.data.field} className="edit button" onClick={this.props.callbacks.onCancel}>Cancel</div>
+          </div>
+        </td>
+      );
+    }
     return (
       <td align="left">
         <div className="edit-input-container">
