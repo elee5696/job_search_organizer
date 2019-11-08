@@ -25,16 +25,16 @@ DROP TABLE IF EXISTS `job_reports`;
 CREATE TABLE `job_reports` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `company` varchar(60) NOT NULL,
-  `user_id` mediumint(8) NOT NULL DEFAULT '1',
-  `phone_interview` tinyint(1) DEFAULT NULL,
-  `onsite_interview` tinyint(1) DEFAULT NULL,
+  `user_id` mediumint(8) NOT NULL,
+  `phone_interview` tinyint(1) DEFAULT '0',
+  `onsite_interview` tinyint(1) DEFAULT '0',
   `interview_questions` longtext,
   `response_date` date DEFAULT NULL,
   `date_applied` date NOT NULL,
   `offer` tinyint(1) DEFAULT NULL,
   `salary` mediumint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `job_reports` (
 
 LOCK TABLES `job_reports` WRITE;
 /*!40000 ALTER TABLE `job_reports` DISABLE KEYS */;
-INSERT INTO `job_reports` VALUES (17,'Netflix',1,0,0,NULL,NULL,'2019-11-06',NULL,NULL),(18,'Google',1,0,0,NULL,NULL,'2019-11-08',NULL,NULL),(19,'Uber',1,0,0,NULL,NULL,'2019-11-07',NULL,NULL);
+INSERT INTO `job_reports` VALUES (17,'Netflix',1,0,0,NULL,NULL,'2019-11-06',NULL,NULL),(18,'Google',1,0,0,NULL,NULL,'2019-11-08',NULL,NULL),(19,'Uber',1,0,0,NULL,NULL,'2019-11-07',NULL,NULL),(20,'Apple',11,0,0,'What is AJAX,What is the benefit of Javascript,Create a linklist in JS',NULL,'2019-11-09',NULL,NULL),(21,'Open Listing',11,NULL,NULL,NULL,NULL,'2019-11-12',NULL,NULL);
 /*!40000 ALTER TABLE `job_reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,9 +58,9 @@ CREATE TABLE `user_list` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
   `email` varchar(60) NOT NULL,
-  `password` varchar(25) NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `user_list` (
 
 LOCK TABLES `user_list` WRITE;
 /*!40000 ALTER TABLE `user_list` DISABLE KEYS */;
-INSERT INTO `user_list` VALUES (1,'Edward Lee','el@email.com','pass');
+INSERT INTO `user_list` VALUES (11,'elee5696','el@mail.com','$2a$10$WcGeUVCFZfs3N4WozfZN/.N0Z19Nj/Od4ZrwoZ514K.60OSMgUN4O');
 /*!40000 ALTER TABLE `user_list` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -82,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-07 18:14:06
+-- Dump completed on 2019-11-08  7:22:41

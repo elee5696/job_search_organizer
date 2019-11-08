@@ -33,9 +33,15 @@ server.get('/api/jobs/:id', (req, res) => {
     `SELECT j.id, company, phone_interview, onsite_interview, interview_questions, DATE_FORMAT(response_date, "%m-%d-%y") response_date, DATE_FORMAT(date_applied, "%m-%d-%y") date_applied, offer, salary FROM job_reports j JOIN user_list u ON u.id = j.user_id WHERE j.user_id=${id}`;
     db.query(query, function (err, data) {
       if (!err) {
+        let jobs = data.map(e => {
+          if (e.interview_questions !== null) {
+            e.interview_questions = e.interview_questions.split(',');
+          }
+          return e;
+        });
         let output = {
           success: true,
-          data: data
+          data: jobs
         };
         res.send(output);
       } else {
