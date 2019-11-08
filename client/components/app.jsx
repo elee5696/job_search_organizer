@@ -109,7 +109,7 @@ export default class App extends React.Component {
   }
 
   getUser(data) {
-    fetch('/api/jobs/user/', {
+    fetch('/api/jobs/user', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
