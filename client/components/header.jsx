@@ -9,12 +9,9 @@ export default class Header extends React.Component {
           <div className="nav-icon container">
             <i className="fas fa-bars"></i>
           </div>
-          {/* <ul className="navigation-list">
-            <li className="navigation-list-item">Home</li>
-            <li className="navigation-list-item">List</li>
-            <li className="navigation-list-item">Log-In</li>
-            <li className="navigation-list-item">Sign-Up</li>
-          </ul> */}
+          <ul className="navigation-list">
+            <li className="navigation-list-item" onClick={this.props.logOut}>Sign-Out</li>
+          </ul>
         </div>
       </div>
     );
