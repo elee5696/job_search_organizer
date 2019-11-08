@@ -34,13 +34,13 @@ input {
 
 .main.container {
   box-sizing: border-box;
-  height: 100vh;
+  height: auto;
 }
 
 /*Header*/
 .header {
   width: 100%;
-  height: 30px;
+  height: 60px;
   border-bottom: 1px solid black;
   justify-content: space-between;
   padding-right: 30px;
@@ -173,6 +173,50 @@ tr:nth-of-type(even) {
   width: 100%;
 }
 
+/*Sign-Up & Log-In*/
+.signup.container,
+.login.container  {
+  border: 1px solid black;
+  flex-direction: column;
+  justify-self: center;
+  width: 30%;
+  height: auto;
+}
+
+.signup form,
+.login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.body-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.signup.container input,
+.login.container input  {
+  margin-bottom: 2em;
+  width: 100%;
+}
+
+.submit.button,
+.toggle-view.button {
+  width: 6rem;
+  height: 2rem;
+  align-self: flex-end;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.toggle-text {
+  display: flex;
+  flex-direction: column;
+}
+
 /*Media Queries*/
 /* Iphone X */
 @media(max-width: 610px) {
@@ -254,5 +298,14 @@ tr:nth-of-type(even) {
   .delete.button,
   .expand.button {
     margin-bottom: 3%;
+  }
+
+  .signup.container,
+  .login.container {
+    border: 1px solid black;
+    flex-direction: column;
+    justify-self: center;
+    width: 80%;
+    height: 100%;
   }
 }
