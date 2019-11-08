@@ -5,22 +5,37 @@ import PostEntryForm from './post/post-entry-form';
 import AddButton from './add-button';
 import AddModal from './add-modal';
 import moment from 'moment';
+import Signup from './user/sign-up';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       jobs: [],
-      addModal: false
+      addModal: false,
+      user: ''
     };
     this.add = this.add.bind(this);
     this.delete = this.delete.bind(this);
     this.edit = this.edit.bind(this);
     this.toggleAddModal = this.toggleAddModal.bind(this);
+    this.addUser = this.addUser.bind(this);
+    this.getUser = this.getUser.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   componentDidMount() {
-    fetch('/api/jobs')
+    const activeSession = window.sessionStorage.getItem('user');
+    if (activeSession) {
+      this.setState(
+        { user: JSON.parse(activeSession).id },
+        () => this.getData(JSON.parse(activeSession).id)
+      );
+    }
+  }
+
+  getData(id) {
+    fetch('/api/jobs/' + id)
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -39,7 +54,7 @@ export default class App extends React.Component {
 
     fetch('/api/jobs', {
       method: 'POST',
-      body: JSON.stringify({ name: name, date: date }),
+      body: JSON.stringify({ name: name, date: date, id: this.state.user }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -90,24 +105,76 @@ export default class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  getUser(data) {
+    fetch('/api/jobs/user/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.success) {
+          window.sessionStorage.setItem('user', JSON.stringify(json.data));
+          this.setState(
+            { user: json.data.id },
+            () => this.getData(json.data.id)
+          );
+        }
+      })
+      .catch(err => console.error(err));
+  }
+
+  addUser(data) {
+    fetch('/api/jobs/user', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.success) {
+          window.sessionStorage.setItem('user', JSON.stringify(json.data));
+          this.setState(
+            { user: json.data.id },
+            () => this.getData(json.data.id)
+          );
+        }
+      })
+      .catch(err => console.error(err));
+  }
+
+  logOut() {
+    window.sessionStorage.removeItem('user');
+    this.setState({
+      loggedIn: false,
+      jobs: []
+    });
+  }
+
   render() {
     return (
       <>
-        <Header/>
+        <Header logOut={this.logOut}/>
         {
           this.state.addModal
             ? <AddModal add={this.add} toggleAddModal={this.toggleAddModal}/>
             : null
         }
         <div className="main container">
-          <PostTable
-            jobs={this.state.jobs}
-            delete={this.delete}
-            edit={this.edit} />
-          <PostEntryForm
-            add={this.add} />
           {
-            this.state.addModal
+            !window.sessionStorage.getItem('user')
+              ? <Signup addUser={this.addUser} getUser={this.getUser}/>
+              : <>
+                <PostTable
+                  jobs={this.state.jobs}
+                  delete={this.delete}
+                  edit={this.edit} />
+                <PostEntryForm
+                  add={this.add} />
+              </>
+          }
+          {
+            this.state.addModal || !window.sessionStorage.getItem('user')
               ? null
               : <AddButton
                 add={this.add}
