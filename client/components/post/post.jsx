@@ -20,7 +20,7 @@ export default class Post extends React.Component {
   }
 
   handleDelete() {
-    this.props.callbacks.delete(this.props.job.id);
+    this.props.callbacks.toggleDelete(this.props.job.id);
   }
 
   toggleEdit(event) {
@@ -92,7 +92,11 @@ export default class Post extends React.Component {
                           callbacks={{ edit: this.props.callbacks.edit, onCancel: this.onCancel }} />
                         : <div className="post-expanded-entry">Questions:
                           <div>
-                            {this.props.job.interview_questions.map((e, i) => { return <div key={i} id="interview_questions" onClick={this.toggleEdit}>{i + 1}.{e}</div>; }) || 'None'}
+                            {
+                              this.props.job.interview_questions !== null
+                                ? this.props.job.interview_questions.map((e, i) => { return <div key={i} id="interview_questions" onClick={this.toggleEdit}>{i + 1}.{e}</div>; })
+                                : 'None'
+                            }
                           </div></div>
                     }
                   </div>
