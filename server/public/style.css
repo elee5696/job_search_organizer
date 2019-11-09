@@ -235,6 +235,35 @@ tr:nth-of-type(even) {
   flex-direction: column;
 }
 
+.modal-container {
+  width: 100%;
+  height: 100%;
+  background: rgba(128, 128, 128, 0.562);
+  position: absolute;
+  display: flex;
+}
+
+/*Delete Modal*/
+.delete.modal.container {
+  height: fit-content;
+  flex-direction: column;
+  border: 1px solid black;
+  text-align: center;
+  background: white;
+  top: 10%;
+  left: 20%;
+  position: fixed;
+}
+
+.delete.modal.container .button {
+  margin: 1em;
+  width: 6em;
+}
+
+.delete.modal.container .container {
+  justify-content: center;
+}
+
 /*Media Queries*/
 /* Iphone X */
 @media(max-width: 610px) {
@@ -244,7 +273,7 @@ tr:nth-of-type(even) {
     height: 100%;
     background: rgba(128, 128, 128, 0.562);
     position: absolute;
-    display: block;
+    display: flex;
   }
 
   .post-form.modal {
@@ -325,5 +354,9 @@ tr:nth-of-type(even) {
     justify-self: center;
     width: 80%;
     height: 100%;
+  }
+
+  .delete.modal.container {
+    left: 6%;
   }
 }
