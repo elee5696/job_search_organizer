@@ -4,6 +4,7 @@ import PostTable from './post/post-table';
 import PostEntryForm from './post/post-entry-form';
 import AddButton from './add-button';
 import AddModal from './add-modal';
+import PostDeleteModal from './post/post-delete-modal';
 import moment from 'moment';
 import Signup from './user/sign-up';
 
@@ -13,15 +14,19 @@ export default class App extends React.Component {
     this.state = {
       jobs: [],
       addModal: false,
+      deleteModal: true,
+      deleteId: '',
       user: ''
     };
     this.add = this.add.bind(this);
     this.delete = this.delete.bind(this);
     this.edit = this.edit.bind(this);
     this.toggleAddModal = this.toggleAddModal.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
     this.addUser = this.addUser.bind(this);
     this.getUser = this.getUser.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.sortByKey = this.sortByKey.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +37,14 @@ export default class App extends React.Component {
         () => this.getData(JSON.parse(activeSession).id)
       );
     }
+  }
+
+  toggleAddModal() {
+    this.setState({ addModal: !this.state.addModal });
+  }
+
+  toggleDeleteModal(id) {
+    this.setState({ deleteModal: !this.state.deleteModal, deleteId: id });
   }
 
   getData(id) {
@@ -45,8 +58,28 @@ export default class App extends React.Component {
       .catch(err => console.error(err));
   }
 
-  toggleAddModal() {
-    this.setState({ addModal: !this.state.addModal });
+  sortByKey(key, order) {
+    let jobs = [...this.state.jobs];
+    jobs.sort((a, b) => {
+      let x = a[key]; let y = b[key];
+      if (order === 'asc') {
+        if (x === null) {
+          return -1;
+        }
+        if (y === null) {
+          return 1;
+        }
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+      }
+      if (x === null) {
+        return 1;
+      }
+      if (y === null) {
+        return -1;
+      }
+      return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+    });
+    this.setState({ jobs: jobs });
   }
 
   add(name, date) {
@@ -76,7 +109,7 @@ export default class App extends React.Component {
       .then(res => res.json())
       .then(json => {
         jobs = jobs.filter(e => e.id !== id);
-        this.setState({ jobs: jobs });
+        this.setState({ jobs: jobs, deleteModal: false, deleteId: '' });
       })
       .catch(err => console.error(err));
   }
@@ -163,6 +196,11 @@ export default class App extends React.Component {
             ? <AddModal add={this.add} toggleAddModal={this.toggleAddModal}/>
             : null
         }
+        {
+          this.state.deleteModal
+            ? <PostDeleteModal id={this.state.deleteId} delete={this.delete} toggleDeleteModal={this.toggleDeleteModal} />
+            : null
+        }
         <div className="main container">
           {
             !window.sessionStorage.getItem('user')
@@ -171,13 +209,16 @@ export default class App extends React.Component {
                 <PostTable
                   jobs={this.state.jobs}
                   delete={this.delete}
-                  edit={this.edit} />
+                  edit={this.edit}
+                  sort={this.sortByKey}
+                  deleteModalView={this.state.deleteModal}
+                  toggleDeleteModal={this.toggleDeleteModal} />
                 <PostEntryForm
                   add={this.add} />
               </>
           }
           {
-            this.state.addModal || !window.sessionStorage.getItem('user')
+            this.state.addModal || this.state.deleteModal || !window.sessionStorage.getItem('user')
               ? null
               : <AddButton
                 add={this.add}
