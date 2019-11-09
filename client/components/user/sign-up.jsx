@@ -4,10 +4,10 @@ export default class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      signUpView: true,
+      signUpView: false,
       email: '',
-      name: '',
-      pass: ''
+      name: 'elee5696',
+      pass: 'password'
     };
 
     this.onChange = this.onChange.bind(this);
