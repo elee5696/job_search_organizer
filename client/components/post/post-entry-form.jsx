@@ -31,9 +31,9 @@ export default class PostEntryForm extends React.Component {
             ? <div className="post-form container modal">
               <form className="post-form modal">
                 <label>Company Name</label>
-                <input type="text" id="name" onChange={this.onChange} value={this.state.name} />
+                <input type="text" id="name" onChange={this.onChange} value={this.state.name} required/>
                 <label>Date Applied</label>
-                <input type="date" id="date" onChange={this.onChange} value={this.state.date} />
+                <input type="date" id="date" onChange={this.onChange} value={this.state.date} required/>
                 <div className="post-form button" onClick={this.onSubmit}>Enter</div>
               </form>
             </div>
