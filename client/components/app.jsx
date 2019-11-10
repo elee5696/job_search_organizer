@@ -16,7 +16,8 @@ export default class App extends React.Component {
       addModal: false,
       deleteModal: false,
       deleteId: '',
-      user: ''
+      user: '',
+      error: ''
     };
     this.add = this.add.bind(this);
     this.delete = this.delete.bind(this);
@@ -163,7 +164,7 @@ export default class App extends React.Component {
           );
         }
       })
-      .catch(err => console.error(err));
+      .catch(this.setState({ error: 'login' }));
   }
 
   addUser(data) {
@@ -182,7 +183,7 @@ export default class App extends React.Component {
           );
         }
       })
-      .catch(err => console.error(err));
+      .catch(this.setState({ error: 'signup' }));
   }
 
   logOut() {
@@ -210,7 +211,7 @@ export default class App extends React.Component {
         <div className="main container">
           {
             !window.sessionStorage.getItem('user')
-              ? <Signup addUser={this.addUser} getUser={this.getUser}/>
+              ? <Signup addUser={this.addUser} getUser={this.getUser} error={this.state.error}/>
               : <>
                 <PostTable
                   jobs={this.state.jobs}
