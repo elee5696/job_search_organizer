@@ -13,6 +13,8 @@ export default class Post extends React.Component {
     this.toggleBoolean = this.toggleBoolean.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.handleExpand = this.handleExpand.bind(this);
+    this.onQuestionEdit = this.onQuestionEdit.bind(this);
+    this.onQuestionDelete = this.onQuestionDelete.bind(this);
   }
 
   onCancel(event) {
@@ -34,6 +36,26 @@ export default class Post extends React.Component {
 
   handleExpand() {
     this.setState({ isExpanded: !this.state.isExpanded });
+  }
+
+  onQuestionDelete(event) {
+    let questions = [...this.props.job.interview_questions];
+    let key = parseInt(event.target.id.slice(event.target.id.length - 1));
+    questions = questions.filter((e, i) => i !== key);
+    this.props.callbacks.edit(this.props.job.id, 'interview_questions', questions.join(','));
+  }
+
+  onQuestionEdit(id, field, value) {
+    if (field === 'interview_questions') {
+      let questions = [...this.props.job.interview_questions];
+      questions.push(value);
+      this.props.callbacks.edit(id, 'interview_questions', questions.join(','));
+    } else {
+      let questions = [...this.props.job.interview_questions];
+      let key = field.slice(field.length - 1);
+      questions[parseInt(key)] = value;
+      this.props.callbacks.edit(id, 'interview_questions', questions.join(','));
+    }
   }
 
   render() {
@@ -86,18 +108,39 @@ export default class Post extends React.Component {
                   </div>
                   <div className="right container">
                     {
-                      this.state.edit === 'interview_questions'
-                        ? <PostEditForm
-                          data={{ id: this.props.job.id, field: 'interview_questions', type: 'text', value: this.props.job.interview_questions.join(',') }}
-                          callbacks={{ edit: this.props.callbacks.edit, onCancel: this.onCancel }} />
-                        : <div className="post-expanded-entry">Questions:
-                          <div>
-                            {
-                              this.props.job.interview_questions !== null
-                                ? this.props.job.interview_questions.map((e, i) => { return <div key={i} id="interview_questions" onClick={this.toggleEdit}>{i + 1}.{e}</div>; })
-                                : <div onClick={this.toggleEdit}>None</div>
-                            }
-                          </div></div>
+                      <div className="post-expanded-entry">Questions:
+                        <div>
+                          {
+                            this.props.job.interview_questions !== null
+                              ? <div>
+                                {
+                                  this.props.job.interview_questions.map((e, i) => {
+                                    if (this.state.edit === 'question_' + i) {
+                                      return (
+                                        <div key={i} style={{ display: 'flex', flexDirection: 'row' }}>
+                                          <div>{(i + 1) + '.'}</div>
+                                          <PostEditForm
+                                            data={{ id: this.props.job.id, field: 'question_' + i, type: 'text', value: e }}
+                                            callbacks={{ edit: this.onQuestionEdit, onCancel: this.onCancel, delete: this.onQuestionDelete }} />
+                                        </div>
+                                      );
+                                    }
+                                    return (
+                                      <div key={i} id={'question_' + i} onClick={this.toggleEdit}>
+                                        {i + 1}.{e}
+                                      </div>
+                                    );
+                                  })
+                                }
+                                <div>Add new question</div>
+                                <PostEditForm
+                                  data={{ id: this.props.job.id, field: 'interview_questions', type: 'text' }}
+                                  callbacks={{ edit: this.onQuestionEdit, onCancel: this.onCancel }} />
+                              </div>
+                              : <div onClick={this.toggleEdit}>None</div>
+                          }
+                        </div>
+                      </div>
                     }
                   </div>
                 </div>
