@@ -11,7 +11,7 @@ export default class PostEditForm extends React.Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     document.addEventListener('mousedown', this.handleClose, false);
   }
 
@@ -33,24 +33,13 @@ export default class PostEditForm extends React.Component {
 
   onSubmit(event) {
     event.preventDefault();
-    let target = event.target.id;
-    this.props.callbacks.edit(this.props.data.id, target, this.state.value);
+    let field = event.target.id;
+    this.props.callbacks.edit(this.props.data.id, field, this.state.value);
+    this.setState({ value: '' });
     this.props.callbacks.onCancel();
   }
 
   render() {
-    if (this.props.data.field === 'interview_questions') {
-      return (
-        <>
-          <div>Questions: </div>
-          <div className="edit-input-container">
-            <textarea id={this.props.data.field} className="edit-input" type={this.props.data.type} value={this.state.value} onChange={this.onChange} />
-            <div id={this.props.data.field} className="edit button" onClick={this.onSubmit}>Submit</div>
-            <div id={this.props.data.field} className="edit button" onClick={this.props.callbacks.onCancel}>Cancel</div>
-          </div>
-        </>
-      );
-    }
     return (
       <div className="edit-container">
         {
@@ -64,6 +53,11 @@ export default class PostEditForm extends React.Component {
           <input id={this.props.data.field} className="edit-input" type={this.props.data.type} value={this.state.value} onChange={this.onChange} />
           <div id={this.props.data.field} className="edit button" onClick={this.onSubmit}>Submit</div>
           <div id={this.props.data.field} className="edit button" onClick={this.props.callbacks.onCancel}>Cancel</div>
+          {
+            this.props.data.field.includes('question_')
+              ? <div id={this.props.data.field} className="edit button" onClick={this.props.callbacks.delete}>Delete</div>
+              : null
+          }
         </div>
       </div>
     );
