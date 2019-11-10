@@ -62,6 +62,10 @@ export default class App extends React.Component {
     let jobs = [...this.state.jobs];
     jobs.sort((a, b) => {
       let x = a[key]; let y = b[key];
+      if (key === 'company') {
+        x.toLowerCase();
+        y.toLowerCase();
+      }
       if (order === 'asc') {
         if (x === null) {
           return -1;
@@ -184,7 +188,7 @@ export default class App extends React.Component {
   logOut() {
     window.sessionStorage.removeItem('user');
     this.setState({
-      loggedIn: false,
+      user: '',
       jobs: []
     });
   }
@@ -192,7 +196,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <Header logOut={this.logOut}/>
+        <Header user={this.state.user} logOut={this.logOut}/>
         {
           this.state.addModal
             ? <AddModal add={this.add} toggleAddModal={this.toggleAddModal}/>
