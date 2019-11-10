@@ -140,7 +140,7 @@ server.put('/api/jobs/user', (req, res) => {
   bcrypt.hash(pass, saltRounds, (err, hash) => {
     let query =
       `INSERT INTO user_list ( name, email, password )
-        VALUES ( ? , ? , ? )`;
+          VALUES ( ? , ? , ? )`;
 
     db.query(query, [username, email, hash], (err, data) => {
       if (!err) {
