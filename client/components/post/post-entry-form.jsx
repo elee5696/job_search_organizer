@@ -44,6 +44,7 @@ export default class PostEntryForm extends React.Component {
         {
           this.props.modal
             ? <div className="post-form container modal">
+              <div>Add A New Job Posting</div>
               <form className="post-form modal">
                 <label>Company Name</label>
                 <input type="text" id="name" onChange={this.onChange} value={this.state.name.value}/>
@@ -63,6 +64,7 @@ export default class PostEntryForm extends React.Component {
               </form>
             </div>
             : <div className="post-form container large">
+              <div>Add A New Job Posting</div>
               <form className="post-form large">
                 <label>Company Name</label>
                 <input type="text" id="name" onChange={this.onChange} value={this.state.name.value}/>
