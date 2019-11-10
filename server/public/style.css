@@ -1,0 +1,363 @@
+body {
+  margin: 0;
+}
+
+#root {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  font-family: Nunito;
+  flex-direction: column;
+}
+
+input {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  padding: 1rem;
+}
+
+.button {
+  border: 1px black solid;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: white;
+  background: rgba(184, 184, 184);
+}
+
+.add-button-container {
+  display: none;
+}
+
+.main.container {
+  box-sizing: border-box;
+  height: auto;
+}
+
+/*Header*/
+.header {
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid black;
+  justify-content: space-between;
+  padding-right: 30px;
+}
+
+.header.container {
+  padding: 0;
+}
+
+.logo {
+  align-items: center;
+}
+
+.navigation {
+  align-items: center;
+}
+
+.navigation.container {
+  padding: 0;
+  padding-right: 1rem;
+}
+
+.navigation-list {
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.navigation-list-item {
+  margin: 1rem;
+}
+
+.nav-icon {
+  display: none;
+}
+
+.nav-icon.container {
+  padding: 0;
+}
+
+
+/*Posts*/
+.post.container {
+  width: 75%;
+}
+
+.post-table {
+  width: 100%;
+}
+
+th {
+  justify-content: center;
+}
+
+td {
+  width: 25%;
+  user-select: none;
+}
+
+tr:nth-of-type(even) {
+  background: rgb(241, 241, 241);
+}
+
+.post-entry:hover {
+  background: rgba(184, 184, 184, 0.37);
+  cursor: pointer;
+}
+
+.functions.container {
+  padding: 0;
+}
+
+.delete.button,
+.expand.button {
+  width: 4rem;
+  margin-right: 1rem;
+  text-align: center;
+}
+
+/*Edit Post*/
+.edit.button {
+  width: 4rem;
+  text-align: center;
+  margin-right: 1rem;
+}
+
+.edit-input {
+  width: 60%;
+  margin-right: 1rem;
+}
+
+.edit-container,
+.edit-input-container {
+  display: flex;
+}
+
+/*Post Form*/
+.post-form.container.large {
+  width: 25%;
+  height: 25%;
+  border: 1px black solid;
+}
+
+.post-form.large {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-form.button {
+  display: flex;
+  width: 4rem;
+  justify-content: center;
+}
+
+.post-form.container.large input,
+.post-form.container.large label {
+  margin-bottom: 1rem;
+}
+
+.post-expanded.container {
+  flex-direction: row;
+}
+
+.post-expanded.container .left.container,
+.post-expanded.container .right.container {
+  flex-direction: column;
+}
+
+.post-expanded.container .left.container {
+  width: 25%;
+}
+
+.post-expanded.container .right.container {
+  width: 75%;
+}
+
+.post-expanded-entry {
+  display: flex;
+  flex-direction: row;
+}
+
+.post-expanded-entry:hover {
+  cursor: pointer;
+}
+
+.post-expanded.container td {
+  width: 100%;
+}
+
+/*Sign-Up & Log-In*/
+.signup.container,
+.login.container  {
+  border: 1px solid black;
+  flex-direction: column;
+  justify-self: center;
+  width: 30%;
+  height: auto;
+}
+
+.signup form,
+.login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.body-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.signup.container input,
+.login.container input  {
+  margin-bottom: 2em;
+  width: 100%;
+}
+
+.submit.button,
+.toggle-view.button {
+  width: 6rem;
+  height: 2rem;
+  align-self: flex-end;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.toggle-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-container {
+  width: 100%;
+  height: 100%;
+  background: rgba(128, 128, 128, 0.562);
+  position: absolute;
+  display: flex;
+}
+
+/*Delete Modal*/
+.delete.modal.container {
+  height: fit-content;
+  flex-direction: column;
+  border: 1px solid black;
+  text-align: center;
+  background: white;
+  top: 10%;
+  left: 20%;
+  position: fixed;
+}
+
+.delete.modal.container .button {
+  margin: 1em;
+  width: 6em;
+}
+
+.delete.modal.container .container {
+  justify-content: center;
+}
+
+/*Media Queries*/
+/* Iphone X */
+@media(max-width: 610px) {
+  /*Modal*/
+  .modal-container {
+    width: 100%;
+    height: 100%;
+    background: rgba(128, 128, 128, 0.562);
+    position: absolute;
+    display: flex;
+  }
+
+  .post-form.modal {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .post-form.container.modal {
+    background: white;
+    width: 70%;
+    height: 30%;
+    display: flex;
+    position: fixed;
+    top: 25vh;
+    left: 10vw;
+    border: 1px black solid;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .post-form.container.modal input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .post-form.container.modal input,
+  .post-form.container.modal label {
+    margin-bottom: 1rem;
+  }
+  .add-button-container {
+    background: white;
+    display: flex;
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 10%;
+    right: 10%;
+    font-size: 45px;
+    border: 1px solid black;
+    border-radius: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .post.container {
+    width: 100%;
+    padding: 0;
+  }
+
+  .functions.container {
+    flex-direction: column;
+  }
+
+  .post-form.container.large {
+    display: none;
+  }
+
+  .navigation-list {
+    display: none;
+  }
+
+  .nav-icon {
+    display: flex;
+  }
+
+  .delete.button,
+  .expand.button {
+    margin-bottom: 3%;
+  }
+
+  .signup.container,
+  .login.container {
+    border: 1px solid black;
+    flex-direction: column;
+    justify-self: center;
+    width: 80%;
+    height: 100%;
+  }
+
+  .delete.modal.container {
+    left: 6%;
+  }
+}

@@ -1,2 +1,4 @@
-mysql_credentials.js
 node_modules
+.env
+npm-debug.log
+server/api/mysql_credentials.js

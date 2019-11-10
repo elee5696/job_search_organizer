@@ -1,29 +1,127 @@
 {
-  "name": "sgt-node",
+  "name": "job_search",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "scripts": {
+    "dev": "webpack-dev-server",
     "build": "webpack",
-    "watch-dev": "webpack --watch",
-    "watch": "nodemon server.js",
-    "start": "node server.js"
+    "watch": "webpack --watch",
+    "db:export": ". ./.env; mysqldump -u $DB_USER -p$DB_PASSWORD $DB_DATABASE > database/dump.sql",
+    "db:import": ". ./.env; mysql -u $DB_USER -p$DB_PASSWORD $DB_DATABASE < database/dump.sql",
+    "nodemon": "nodemon server/api/server.js",
+    "start": "node server/api/server.js",
+    "startAll": "npm-run-all -p nodemon watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elee5696/Prov.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elee5696/Prov/issues"
+  },
+  "browserslist": "> 0.25%, not dead",
+  "eslintIgnore": [
+    "server/public/main.js"
+  ],
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parser": "babel-eslint",
+    "extends": [
+      "plugin:react/recommended",
+      "eslint:recommended",
+      "standard"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+      ],
+      "padded-blocks": 0,
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "curly": [
+        "error",
+        "multi-line"
+      ],
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
+      "space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "always",
+          "named": "never",
+          "asyncArrow": "always"
+        }
+      ],
+      "react/prop-types": 0,
+      "react/react-in-jsx-scope": 0
+    }
+  },
   "dependencies": {
+    "@material-ui/core": "^4.5.2",
+    "@material-ui/icons": "^4.5.1",
+    "bcryptjs": "^2.4.3",
+    "css-loader": "^3.2.0",
     "express": "^4.17.1",
+    "moment": "^2.24.0",
     "mysql": "^2.17.1",
     "nodemon": "^1.19.3",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.2",
+    "@babel/core": "^7.6.4",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/preset-env": "^7.6.3",
+    "babel-eslint": "10.0.1",
     "babel-loader": "^8.0.6",
-    "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9"
+    "eslint": "5.16.0",
+    "eslint-config-standard": "12.0.0",
+    "eslint-plugin-import": "2.17.2",
+    "eslint-plugin-node": "9.0.1",
+    "eslint-plugin-promise": "4.1.1",
+    "eslint-plugin-react": "7.13.0",
+    "eslint-plugin-standard": "4.0.0",
+    "husky": "2.2.0",
+    "lint-staged": "8.1.6",
+    "npm-run-all": "^4.1.5",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
   }
 }
