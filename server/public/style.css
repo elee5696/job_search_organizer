@@ -184,6 +184,11 @@ tr:nth-of-type(even) {
   flex-direction: row;
 }
 
+.right.container .post-expanded-entry {
+  display: flex;
+  flex-direction: column;
+}
+
 .post-expanded-entry:hover {
   cursor: pointer;
 }
