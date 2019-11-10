@@ -14,7 +14,7 @@ export default class App extends React.Component {
     this.state = {
       jobs: [],
       addModal: false,
-      deleteModal: true,
+      deleteModal: false,
       deleteId: '',
       user: ''
     };
