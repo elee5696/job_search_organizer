@@ -6,12 +6,13 @@ export default class Header extends React.Component {
       <div className="header container">
         <div className="logo container">Job Search</div>
         <div className="navigation container">
-          <div className="nav-icon container">
-            <i className="fas fa-bars"></i>
-          </div>
-          <ul className="navigation-list">
-            <li className="navigation-list-item" onClick={this.props.logOut}>Sign-Out</li>
-          </ul>
+          {
+            this.props.user
+              ? <ul className="navigation-list">
+                <li className="navigation-list-item" onClick={this.props.logOut}>Sign-Out</li>
+              </ul>
+              : null
+          }
         </div>
       </div>
     );

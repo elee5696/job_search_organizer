@@ -72,10 +72,7 @@ input {
 
 .navigation-list-item {
   margin: 1rem;
-}
-
-.nav-icon {
-  display: none;
+  cursor: pointer;
 }
 
 .nav-icon.container {
@@ -94,6 +91,10 @@ input {
 
 th {
   justify-content: center;
+}
+
+th:nth-child(-n+3) {
+  cursor: pointer;
 }
 
 td {
@@ -182,6 +183,11 @@ tr:nth-of-type(even) {
 .post-expanded-entry {
   display: flex;
   flex-direction: row;
+}
+
+.right.container .post-expanded-entry {
+  display: flex;
+  flex-direction: column;
 }
 
 .post-expanded-entry:hover {
@@ -305,7 +311,7 @@ tr:nth-of-type(even) {
 
   .post-form.container.modal input,
   .post-form.container.modal label {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   .add-button-container {
     background: white;
@@ -333,14 +339,6 @@ tr:nth-of-type(even) {
 
   .post-form.container.large {
     display: none;
-  }
-
-  .navigation-list {
-    display: none;
-  }
-
-  .nav-icon {
-    display: flex;
   }
 
   .delete.button,
