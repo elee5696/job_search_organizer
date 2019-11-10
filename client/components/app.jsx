@@ -130,7 +130,9 @@ export default class App extends React.Component {
         jobs = jobs.map(e => {
           if (e.id === id) {
             if (field === 'interview_questions') {
-              value = value.split(',');
+              if (value !== null) {
+                value = value.split(',');
+              }
             }
             e[field] = value;
           }
