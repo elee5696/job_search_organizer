@@ -81,7 +81,7 @@ export default class Post extends React.Component {
                         ? <PostEditForm
                           data={{ id: this.props.job.id, field: 'salary', type: 'number', value: this.props.job.salary }}
                           callbacks={{ edit: this.props.callbacks.edit, onCancel: this.onCancel }} />
-                        : <div className="post-expanded-entry">Offer:<div id="salary" onClick={this.toggleEdit}>{this.props.job.salary || 'None'}</div></div>
+                        : <div className="post-expanded-entry">Salary:<div id="salary" onClick={this.toggleEdit}>{this.props.job.salary || 'None'}</div></div>
                     }
                   </div>
                   <div className="right container">
@@ -95,7 +95,7 @@ export default class Post extends React.Component {
                             {
                               this.props.job.interview_questions !== null
                                 ? this.props.job.interview_questions.map((e, i) => { return <div key={i} id="interview_questions" onClick={this.toggleEdit}>{i + 1}.{e}</div>; })
-                                : 'None'
+                                : <div onClick={this.toggleEdit}>None</div>
                             }
                           </div></div>
                     }
