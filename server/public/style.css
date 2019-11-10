@@ -133,6 +133,7 @@ tr:nth-of-type(even) {
   margin-right: 1rem;
 }
 
+.edit-container,
 .edit-input-container {
   display: flex;
 }
