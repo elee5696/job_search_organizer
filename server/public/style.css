@@ -38,6 +38,10 @@ input {
   height: auto;
 }
 
+.error-text {
+  color: red;
+}
+
 /*Header*/
 .header {
   width: 100%;

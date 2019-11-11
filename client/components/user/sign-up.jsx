@@ -70,7 +70,7 @@ export default class Signup extends React.Component {
                   <label>Password</label>
                   <input id="pass" onChange={this.onChange} type="password" />
                   {
-                    this.props.error === 'signup' ? <div>Invalid username</div> : null
+                    this.props.error === 'signup' ? <div className="error-text">Invalid username</div> : null
                   }
                   <div className="submit button" onClick={this.onSubmit}><div>Submit</div></div>
                 </form>
@@ -90,7 +90,7 @@ export default class Signup extends React.Component {
                   <label>Password</label>
                   <input id="pass" value={this.state.pass} onChange={this.onChange} type="password" />
                   {
-                    this.props.error === 'login' ? <div>Invalid Log-in</div> : null
+                    this.props.error === 'login' ? <div className="error-text">Invalid Log-in</div> : null
                   }
                   <div className="submit button" onClick={this.onLogin}><div>Log in</div></div>
                 </form>

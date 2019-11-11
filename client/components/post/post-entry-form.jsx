@@ -51,14 +51,14 @@ export default class PostEntryForm extends React.Component {
                 {
                   this.state.name.isValid
                     ? null
-                    : <label>Please enter a name</label>
+                    : <label className="error-text">Please enter a name</label>
                 }
                 <label>Date Applied</label>
                 <input type="date" id="date" onChange={this.onChange} value={this.state.date.value}/>
                 {
                   this.state.date.isValid
                     ? null
-                    : <label>Please pick a date</label>
+                    : <label className="error-text">Please pick a date</label>
                 }
                 <div className="post-form button" onClick={this.onSubmit}>Enter</div>
               </form>
@@ -71,14 +71,14 @@ export default class PostEntryForm extends React.Component {
                 {
                   this.state.name.isValid
                     ? null
-                    : <label>Please enter a name</label>
+                    : <label className="error-text">Please enter a name</label>
                 }
                 <label>Date Applied</label>
                 <input type="date" id="date" onChange={this.onChange} value={this.state.date.value}/>
                 {
                   this.state.date.isValid
                     ? null
-                    : <label>Please pick a date</label>
+                    : <label className="error-text">Please pick a date</label>
                 }
                 <div className="post-form button" onClick={this.onSubmit}>Enter</div>
               </form>
