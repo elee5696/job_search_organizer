@@ -156,15 +156,17 @@ export default class App extends React.Component {
     })
       .then(res => res.json())
       .then(json => {
-        if (json.success) {
+        if (json.success === true) {
           window.sessionStorage.setItem('user', JSON.stringify(json.data));
           this.setState(
             { user: json.data.id },
             () => this.getData(json.data.id)
           );
+        } else {
+          this.setState({ error: 'login' });
         }
       })
-      .catch(this.setState({ error: 'login' }));
+      .catch(err => console.error(err));
   }
 
   addUser(data) {

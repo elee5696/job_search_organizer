@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const mysql = require('mysql');
 const db = mysql.createConnection(credentials);
-const port = 3000;
+const port = 3008;
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
@@ -164,7 +164,7 @@ server.post('/api/jobs/user', (req, res) => {
   'SELECT id, name, password FROM user_list WHERE name=?';
 
   db.query(query, [username], (err, data) => {
-    if (!err) {
+    if (!err && data.length !== 0) {
       let hash = data[0].password;
       bcrypt.compare(pass, hash).then(function (response) {
         if (response) {
@@ -173,10 +173,18 @@ server.post('/api/jobs/user', (req, res) => {
             data: { 'id': data[0].id, 'username': username }
           };
           res.send(output);
+        } else {
+          let output = {
+            success: false
+          };
+          res.send(output);
         }
       });
     } else {
-      res.send(err);
+      let output = {
+        success: false
+      };
+      res.send(output);
     }
   });
 });
